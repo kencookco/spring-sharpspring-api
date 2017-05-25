@@ -1,4 +1,4 @@
-package com.kencook.sharpspring.properties;
+package com.kencook.sharpspring;
 
 import lombok.Getter;
 import lombok.Setter;

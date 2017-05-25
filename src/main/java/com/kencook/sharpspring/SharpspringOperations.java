@@ -1,13 +1,11 @@
 package com.kencook.sharpspring;
 
-import com.kencook.sharpspring.properties.SharpspringProperties;
+import com.kencook.sharpspring.responses.SharpspringResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.List;
 
 /**
  * Passes requests to Sharpspring
@@ -40,8 +38,8 @@ public class SharpspringOperations {
      * @return list of results from the query
      */
     @SuppressWarnings("unchecked")
-    public <T> List<T> query(SharpspringRequest request, Class<T> clazz) {
-        return (List<T>)operations.postForObject(url, request, List.class);
+    public <T> T query(SharpspringRequest request, Class<T> clazz) {
+        return operations.postForObject(url, request, clazz);
     }
 
 

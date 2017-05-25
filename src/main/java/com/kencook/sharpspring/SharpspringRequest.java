@@ -3,6 +3,7 @@ package com.kencook.sharpspring;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,6 +16,6 @@ public class SharpspringRequest {
 
     public String method;
     public int id;
-    public Map<String,SharpspringParameter> params;
+    public Map<String,Map<String,Object>> params = new HashMap<>();
 
 }
