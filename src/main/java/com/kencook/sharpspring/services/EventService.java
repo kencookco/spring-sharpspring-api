@@ -33,7 +33,7 @@ public class EventService {
      * @param timestamp yyyy-MM-dd HH:mm:ss dates without time will pull events for the entire date.
      * @return a list of events associated with the timestamp
      */
-    List<Event> getEvents(String timestamp) throws SharpspringException {
+    public List<Event> getEvents(String timestamp) throws SharpspringException {
         SharpspringRequest request = request(1, SharpspringMethod.GET_EVENTS)
                 .where("createTimestamp").is("2017-05-23")
                 .build();
