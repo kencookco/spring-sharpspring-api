@@ -1,13 +1,10 @@
 buildscript {
-    ext {
-        springBootVersion = '1.5.3.RELEASE'
-    }
     repositories {
         mavenCentral()
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.2.RELEASE"
         classpath 'io.spring.gradle:propdeps-plugin:0.0.9.RELEASE'
     }
 }
@@ -19,13 +16,16 @@ configure(allprojects) {
     apply plugin: 'propdeps-eclipse'
 }
 
+ext {
+    springBootVersion = '1.5.3.RELEASE'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
-group 'com.kencook.sharpspring'
-
-version '0.1.0-SNAPSHOT'
+group = 'com.kencook.springsource'
+version = '0.1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
@@ -33,10 +33,16 @@ repositories {
 }
 
 dependencies {
-    optional "org.springframework.boot:spring-boot-configuration-processor"
     compile 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly('org.projectlombok:lombok')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compileOnly 'org.projectlombok:lombok'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    optional 'org.springframework.boot:spring-boot-configuration-processor'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    }
 }
 
 compileJava.dependsOn(processResources)
